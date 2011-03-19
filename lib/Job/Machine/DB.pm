@@ -476,4 +476,8 @@ See get_notification above for the return value.
 
   while (my $task = $self->db->fetch_work_task) {
 
+Fetch the next work task and return it, or undef there are no more tasks.
+C< $task > is a hashref corresponding to a row in the tasks table, with the C< parameters >
+value replaced with a C< data > value containing decoded JSON.
+
 =cut
