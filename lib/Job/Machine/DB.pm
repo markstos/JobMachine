@@ -75,7 +75,7 @@ sub set_listen {
 }
 
 sub fetch_work_task {
-	my ($self,$pid) = @_;
+	my $self = shift;
 	my $queue = ref $self->{queue} ? $self->{queue} : [$self->{queue}];
 	$self->{current_table} = 'task';
 	my $elems = join(',', ('?') x @$queue);
