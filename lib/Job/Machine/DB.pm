@@ -84,7 +84,7 @@ sub fetch_work_task {
 			"$self->{schema}".$self->{current_table} t
 		SET
 			status=100,
-			modified=default
+			modified=now()
 		FROM
 			"jobmachine".class cx
 		WHERE
@@ -465,5 +465,15 @@ each row looks like this:
  my ($name, $pid, $payload) = @$notify;
 
 =head2 set_listen
+
+  my $notifies = $self->set_listen($timeout);
+
+Starts listening for C<$timeout> seconds. Returns [0,0] if there are
+no notifications ready for an arrayref of notifications if there are.
+See get_notification above for the return value.
+
+=head2 fetch_work_task
+
+  while (my $task = $self->db->fetch_work_task) {
 
 =cut
