@@ -56,9 +56,8 @@ sub notify {
 }
 
 sub get_notification {
-	my ($self,$timeout) = @_;
-	my $dbh = $self->dbh;
-	my $notifies = $dbh->func('pg_notifies');
+    my $self = shift;
+	my $notifies = $self->dbh->func('pg_notifies');
 	return $notifies;
 }
 
@@ -464,5 +463,7 @@ Retrievies the pending notifications. The return value is an arrayref where
 each row looks like this:
 
  my ($name, $pid, $payload) = @$notify;
+
+=head2 set_listen
 
 =cut
