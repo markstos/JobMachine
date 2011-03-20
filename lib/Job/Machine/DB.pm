@@ -492,4 +492,28 @@ value replaced with a C< data > value containing decoded JSON.
 Insert a Perl data structure into the named queue and return the task ID
 inserted. The data structure is first encoded as JSON.
 
+=head2 dbh
+
+Return the database handle stored in the object, or die with a stack trace.
+
+=head2 task_id
+
+ my $task_id = $db->task_id;
+
+Return a task_id stored in the object, or die with a stack trace if no task_id
+is found.
+
+=head2 disconnect
+
+ $db->disconnect;
+
+Disconnect from the database if it's connected.
+
+=head2 DESTROY
+
+Called automatically when the object goes out of scope. We simply disconnect
+from the database at this time.
+
+
+
 =cut
