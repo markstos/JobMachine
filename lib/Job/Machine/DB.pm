@@ -479,10 +479,17 @@ See get_notification above for the return value.
 
 =head2 fetch_work_task
 
-  while (my $task = $self->db->fetch_work_task) {
+  while (my $task = $db->fetch_work_task) {
 
 Fetch the next work task and return it, or undef there are no more tasks.
 C< $task > is a hashref corresponding to a row in the tasks table, with the C< parameters >
 value replaced with a C< data > value containing decoded JSON.
+
+=head2 insert_task
+
+ my $id = $db->insert_task($data,$queue);
+
+Insert a Perl data structure into the named queue and return the task ID
+inserted. The data structure is first encoded as JSON.
 
 =cut
