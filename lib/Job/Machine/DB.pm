@@ -64,12 +64,12 @@ sub get_notification {
 sub set_listen {
 	my ($self,$timeout) = @_;
 	my $dbh = $self->dbh;
-	my $notifies = $dbh->func('pg_notifies');
+	my $notifies = $self->get_notification;
 	if (!$notifies) {
 		my $fd = $dbh->{pg_socket};
 		vec(my $rfds='',$fd,1) = 1;
 		my $n = select($rfds, undef, undef, $timeout);
-		$notifies = $dbh->func('pg_notifies');
+		$notifies = $self->get_notification;
 	}
 	return $notifies || [0,0];
 }
