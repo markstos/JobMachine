@@ -354,6 +354,12 @@ sub select_all {
 	return ( \@result );
 }
 
+# XXX This function should be refactored to 
+# avoid using names like "$data->[$i]->[0].
+# ... it appears this routine has something to do with pairs of data
+# but it's not clear what. 
+# The DBI docs show that bind_param() usually takes a value to bind to as the second
+# argument, but here that value is undef. 
 sub set_bind_type {
 	my ($self,$sth,$data) = @_;
 	for my $i (0..scalar(@$data)-1) {
@@ -364,6 +370,7 @@ sub set_bind_type {
 	}
 	return;
 }
+
 
 sub do {
 	my ($self, %args) = @_;
@@ -492,6 +499,79 @@ value replaced with a C< data > value containing decoded JSON.
 Insert a Perl data structure into the named queue and return the task ID
 inserted. The data structure is first encoded as JSON.
 
+=head2 set_task_status
+
+XXX Needs documentation
+
+=head2 fetch_class
+
+XXX Needs documentation
+
+=head2 insert_class
+
+XXX Needs documentation
+
+=head2 insert_result
+
+XXX Needs documentation
+
+=head2 fetch_result
+
+XXX Needs documentation
+
+=head2 fetch_results
+
+XXX Needs documentation
+
+=head revive_tasks
+
+XXX Needs documentation
+
+=head2 fail_tasks
+
+XXX Needs documentation
+
+=head2 remove_tasks
+
+XXX Needs documentation
+
+=head2 select_first
+
+XXX Needs documentation
+
+=head2 select_all
+
+XXX Needs documentation
+
+=head2 set_bind_type
+
+ $db->set_bind_type($sth,\@bind);
+
+XXX Needs documentation.
+
+=head2 do
+
+ $rows = $self->do(sql => $sql,data => \@bind );
+ $rows = $self->do(sth => $sth,data => \@bind );
+
+Executes the SQL described by the C<< sql >> or C<< sth >> arguments, using an
+arrayref of vind values passed to C<< data >>. Returns the number of rows
+inserted or updated.
+
+=head2 insert
+
+ $retval = $self->insert(sql => $sql,data => \@bind );
+ $retval = $self->insert(sth => $sth,data => \@bind );
+
+Inserts the SQL described by the C<< sql >> or C<< sth >> arguments, using
+an arrayref of vind values passed to C<< data >>.
+
+=head2 update
+
+ $db->update(sql => $sql,data => \@bind );
+
+Behaves like L<< do >>, but doesn't return anything.
+
 =head2 dbh
 
 Return the database handle stored in the object, or die with a stack trace.
@@ -513,7 +593,5 @@ Disconnect from the database if it's connected.
 
 Called automatically when the object goes out of scope. We simply disconnect
 from the database at this time.
-
-
 
 =cut
